@@ -1,41 +1,33 @@
 <%- model_class = Product -%>
+
 <div class="page-header">
   <h1>Aardvarks & Anteaters: Absurd Animals </h1>
+
 <hr/>
+
 <h3><%= page_entries_info @products %></h3>
+
 <hr/>
+
 </div>
+
+<div id="products">
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%=   (:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= link_to product.id, product_path(product) %></td>
-        <td><%= product.name %></td>
-        <td><%= product.price %></td>
-        <td><%=l product.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_product_path(product), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      product_path(product),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
+      
+       <%= render @products %>
+  
+  
 </table>
-
+</div>
 <%= paginate @products %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
