@@ -1,8 +1,15 @@
 Store::Application.routes.draw do
+  root :to => 'users#index'
+  resources :user_sessions
+  resources :reviews
   resources :users
 
-  resources :products
-
+  resources :products do
+    resources :reviews, :except => [:index]
+  end
+  
+  get 'login' => 'user_sessions#new', :as => :login
+  post 'logout' => 'user_sessions#destroy', :as => :logout
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
